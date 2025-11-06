@@ -13,11 +13,14 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 // Components
 import { FileUpload } from "@/components/extractor/FileUpload";
+import { FilePreview } from "@/components/extractor/FilePreview";
 import { ExtractButton } from "@/components/extractor/ExtractButton";
 import { ProgressBar } from "@/components/extractor/ProgressBar";
 import { ErrorMessage } from "@/components/extractor/ErrorMessage";
+import { StructuredTextDisplay } from "@/components/extractor/StructuredTextDisplay";
 import { TextDisplay } from "@/components/extractor/TextDisplay";
 import { TranslateButton } from "@/components/extractor/TranslateButton";
+import { InvoiceFieldMapper } from "@/components/extractor/InvoiceFieldMapper";
 
 export default function PdfImageTextExtractor() {
   const [file, setFile] = useState<File | null>(null);
@@ -92,7 +95,7 @@ export default function PdfImageTextExtractor() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col items-center justify-center p-4 sm:p-6">
-      <Card className="w-full max-w-4xl shadow-xl border-0">
+      <Card className="w-full max-w-7xl shadow-xl border-0">
         <CardContent className="p-6 sm:p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-2">
@@ -103,7 +106,8 @@ export default function PdfImageTextExtractor() {
               </h1>
             </div>
             <p className="text-gray-600">
-              Extract and translate text from documents with OCR technology
+              Extract, translate, and map invoice fields from documents with OCR
+              technology
             </p>
           </div>
 
@@ -123,18 +127,35 @@ export default function PdfImageTextExtractor() {
           {/* Error Message */}
           <ErrorMessage error={displayError} />
 
-          {/* Extracted Text */}
-          {text && (
-            <TextDisplay
-              text={text}
-              title="Extracted Text"
-              icon="file"
-              onCopy={() => copyToClipboard(text)}
-              onDownload={() => downloadText(text, "extracted-text.txt")}
-            />
+          {/* Two Column Layout for Preview and Results */}
+          {file && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Left Column: File Preview */}
+              <div>
+                <FilePreview file={file} />
+              </div>
+
+              {/* Right Column: Extracted Text */}
+              <div className="space-y-6">
+                {text && (
+                  <>
+                    <StructuredTextDisplay
+                      text={text}
+                      onCopy={() => copyToClipboard(text)}
+                      onDownload={() =>
+                        downloadText(text, "extracted-text.txt")
+                      }
+                    />
+
+                    {/* Invoice Field Mapper */}
+                    <InvoiceFieldMapper text={text} />
+                  </>
+                )}
+              </div>
+            </div>
           )}
 
-          {/* Translate Button */}
+          {/* Translate Button - Full Width */}
           {text && (
             <TranslateButton
               disabled={translation.translating}
@@ -143,7 +164,7 @@ export default function PdfImageTextExtractor() {
             />
           )}
 
-          {/* Translated Text */}
+          {/* Translated Text - Full Width */}
           {translation.translated && (
             <TextDisplay
               text={translation.translated}
@@ -161,8 +182,8 @@ export default function PdfImageTextExtractor() {
 
       {/* Info Footer */}
       <p className="mt-6 text-sm text-gray-500 text-center">
-        Supports English and Japanese OCR • Free translation up to 5000
-        characters per day
+        Supports English and Japanese OCR • Invoice field extraction • Free
+        translation up to 5000 characters per day
       </p>
     </div>
   );
