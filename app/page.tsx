@@ -20,7 +20,7 @@ import { ErrorMessage } from "@/components/extractor/ErrorMessage";
 import { StructuredTextDisplay } from "@/components/extractor/StructuredTextDisplay";
 import { TextDisplay } from "@/components/extractor/TextDisplay";
 import { TranslateButton } from "@/components/extractor/TranslateButton";
-import { EnhancedInvoiceMapper } from "@/components/extractor/EnhancedInvoiceMapper";
+import { UniversalDocumentMapper } from "@/components/extractor/UniversalDocumentMapper";
 
 export default function PdfImageTextExtractor() {
   const [file, setFile] = useState<File | null>(null);
@@ -94,14 +94,14 @@ export default function PdfImageTextExtractor() {
   const displayError = globalError || extractorError || translation.error;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex flex-col items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 flex flex-col items-center justify-center p-4 sm:p-6">
       <Card className="w-full max-w-7xl shadow-xl border-0">
         <CardContent className="p-6 sm:p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-2">
             <div className="flex items-center justify-center gap-2">
               <FileText className="w-8 h-8 text-blue-600" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 PDF & Image Text Extractor
               </h1>
             </div>
@@ -147,8 +147,8 @@ export default function PdfImageTextExtractor() {
                       }
                     />
 
-                    {/* Invoice Field Mapper */}
-                    <EnhancedInvoiceMapper text={text} />
+                    {/* Universal Document Mapper */}
+                    <UniversalDocumentMapper text={text} />
                   </>
                 )}
               </div>

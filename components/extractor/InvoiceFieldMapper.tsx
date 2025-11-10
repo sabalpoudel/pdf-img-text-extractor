@@ -106,14 +106,14 @@ export const InvoiceFieldMapper = ({ text }: InvoiceFieldMapperProps) => {
           onClick={extractInvoiceFields}
           disabled={isExtracting}
           size="sm"
-          className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+          className="bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
         >
           <Sparkles className="w-4 h-4 mr-1" />
           Auto-Extract Fields
         </Button>
       </div>
 
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 space-y-3">
+      <div className="bg-linear-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 space-y-3">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {Object.entries(fields).map(([fieldName, value]) => (
             <div key={fieldName} className="space-y-1">
