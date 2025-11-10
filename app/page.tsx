@@ -20,7 +20,7 @@ import { ErrorMessage } from "@/components/extractor/ErrorMessage";
 import { StructuredTextDisplay } from "@/components/extractor/StructuredTextDisplay";
 import { TextDisplay } from "@/components/extractor/TextDisplay";
 import { TranslateButton } from "@/components/extractor/TranslateButton";
-import { InvoiceFieldMapper } from "@/components/extractor/InvoiceFieldMapper";
+import { EnhancedInvoiceMapper } from "@/components/extractor/EnhancedInvoiceMapper";
 
 export default function PdfImageTextExtractor() {
   const [file, setFile] = useState<File | null>(null);
@@ -148,7 +148,7 @@ export default function PdfImageTextExtractor() {
                     />
 
                     {/* Invoice Field Mapper */}
-                    <InvoiceFieldMapper text={text} />
+                    <EnhancedInvoiceMapper text={text} />
                   </>
                 )}
               </div>
